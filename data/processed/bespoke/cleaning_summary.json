@@ -1,0 +1,10 @@
+{
+  "source_rows": 115100,
+  "eligible_rows": 57661,
+  "pairs_before_deduplication": 112371,
+  "duplicates_removed": 63883,
+  "clean_pairs": 48488,
+  "missing_mouse_names": 748,
+  "missing_target_names": 5354,
+  "field_checks": "passed"
+}
