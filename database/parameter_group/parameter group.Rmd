@@ -1,0 +1,150 @@
+---
+title: "parameter group"
+output:
+  html_document: default
+  pdf_document: default
+date: "2026-11-20"
+---
+```{r}
+clean_data <- read.csv("../cleaning/new/final_clean_data.csv",stringsAsFactors = FALSE,na.strings = c("", "NA"),check.names = FALSE)
+# Export unique parameter names for manual review
+parameter_name <- unique(clean_data$parameter_name)
+write.csv(parameter_name, "parameter_name.csv")
+```
+## Parameter table
+```{r}
+library(dplyr)
+
+parameter_table <- clean_data %>%
+  transmute(
+    parameter_stable_id = trimws(as.character(parameter_stable_id)),
+    parameter_name = trimws(as.character(parameter_name))
+  ) %>%
+  filter(
+# Exclude records without a parameter ID from the parameter table
+    !is.na(parameter_stable_id),
+    parameter_stable_id != ""
+  ) %>%
+  distinct() %>%
+# Arrange rows to make the table easier to inspect
+  arrange(parameter_stable_id)
+
+# A result of 0 means there are no duplicated parameter IDs.
+sum(duplicated(parameter_table$parameter_stable_id))
+```
+## Group table
+```{r}
+group_table <- data.frame(
+  group_id = 1:16,
+  group_name = c("Weight","Images","Brain","Blood lipids","Glucose tolerance","Bone size/mineralisation","Freezing behaviour","Prepulse inhibition","ABR auditory threshold","Sleep","Adrenal gland","Haematology","Body composition","Liver clinical chemistry","Renal clinical chemistry","Cardiovascular"),
+  description = c(
+    "Body weight and body mass measurements, organ weights, and other measurements expressed relative to or normalised against body weight.",
+    "Image-derived or visually assessed morphology and structure candidates.",
+    "Brain and brain-region parameters, including cerebellum, cerebral cortex, hippocampus and hypothalamus.",
+    "Cholesterol, triglyceride, lipoprotein and fatty-acid measurements.",
+    "Glucose challenge, glucose response, insulin and HbA1c measurements.",
+    "Bone area, mineral content, mineral density and length.",
+    "Freezing and fear-conditioning measurements.",
+    "Prepulse inhibition measurements.",
+    "Auditory brainstem response threshold measurements.",
+    "Sleep duration, bout and sleep-associated measurements.",
+    "Adrenal gland measurements and terms.",
+    "Blood cell counts, differential counts, red-cell indices and immune-cell subsets, including T, B, NK and NKT cells.",
+    "Fat and lean mass and body-composition ratios.",
+    "Liver-associated clinical chemistry measurements.",
+    "Renal-associated clinical chemistry measurements.",
+    "Heart and cardiovascular structure or function measurements."
+  ),
+  stringsAsFactors = FALSE
+)
+```
+## Search groups
+```{r}
+parameter_name <- parameter_table$parameter_name
+
+group_list <- list(
+  "Weight" = grepl("weight|body mass",parameter_name,ignore.case = TRUE),
+  "Images" = grepl(
+  "morphology|retina|retinal|lens density|blood vessels?.*(pattern|structure)|(pattern|structure).*blood vessels?|corneal thickness|vitreous.*thickness|coat.*colour pattern|coat.*color pattern|bone area|bone mineral (content|density)|fat mass|lean mass",
+  parameter_name,
+  ignore.case = TRUE
+) &!grepl("^(left|right) retina$",parameter_name,ignore.case = TRUE),
+  "Brain" = grepl("brain|brainstem|forebrain|hindbrain|midbrain|cerebellum|cerebral cortex|hippocampus|hypothalamus",parameter_name,ignore.case = TRUE),
+  "Blood lipids" =grepl("cholesterol|triglyceride|free fatty acid|lipoprotein|apolipoprotein",parameter_name, ignore.case = TRUE),
+  "Glucose tolerance" =grepl("glucose|insulin|glycos[iy]lated hemoglobin A1c",parameter_name, ignore.case = TRUE),
+  "Bone size/mineralisation" =grepl("bone area|bone mineral (content|density)|BMC/BMD|BMC/body weight|tibia length",parameter_name, ignore.case = TRUE),
+  "Freezing behaviour" =grepl("freezing", parameter_name, ignore.case = TRUE),
+  "Prepulse inhibition" =grepl("pre.?pulse inhibition", parameter_name, ignore.case = TRUE),
+  "ABR auditory threshold" =grepl("ABR.*threshold", parameter_name, ignore.case = TRUE),
+  "Sleep" =grepl("sleep", parameter_name, ignore.case = TRUE),
+  "Adrenal gland" =grepl("adrenal gland", parameter_name, ignore.case = TRUE),
+  "Haematology" = grepl(
+  "red blood cell|white blood cell|platelet|hemoglobin|haemoglobin|hematocrit|haematocrit|mean[- ](cell|corpuscular)|eosinophil|basophil|neutrophil|monocyte|lymphocyte|reticulocyte|T cells?|B cells?|NK cells?|NKT cells?|B1B|B2B|B1a|CD[0-9]+",
+  parameter_name,
+  ignore.case = TRUE
+),
+
+  "Body composition" =grepl("fat mass|lean mass|fat/body weight|lean/body weight|BMC/body weight|body composition|adiposity",parameter_name, ignore.case = TRUE),
+  "Liver clinical chemistry" =grepl("alanine aminotransferase|aspartate aminotransferase|alkaline phosphatase|bilirubin|gamma.?glutamyl",parameter_name, ignore.case = TRUE),
+  "Renal clinical chemistry" =grepl("creatinine|urea|uric acid|microalbumin|BUN",parameter_name, ignore.case = TRUE),
+  "Cardiovascular" =grepl("heart|cardiac|QRS|ECG|stroke volume",parameter_name, ignore.case = TRUE)
+)
+
+# Check that group names match the names used in the grouping rules
+setequal(group_table$group_name, names(group_list))
+
+```
+## Parameter-group member table
+```{r}
+# member_id gives each group-parameter relationship a unique identifier,
+# making it easier to define a single-column primary key in SQL.
+parameter_group_member <- data.frame(
+  member_id = integer(),
+  group_id = integer(),
+  parameter_stable_id = character(),
+  stringsAsFactors = FALSE
+)
+
+# Add one row for each group-parameter match; a parameter may belong to multiple groups.
+for (g in names(group_list)) {
+  selected <- parameter_table[group_list[[g]], , drop = FALSE]
+
+  if (nrow(selected) > 0) {
+    group_id <- group_table$group_id[
+      match(g, group_table$group_name)
+    ]
+
+    new_rows <- data.frame(
+  member_id = nrow(parameter_group_member) + seq_len(nrow(selected)),
+  group_id = rep(group_id, nrow(selected)),
+  parameter_stable_id = selected$parameter_stable_id,
+  stringsAsFactors = FALSE
+)
+
+    parameter_group_member <- rbind(parameter_group_member,new_rows)
+  }
+}
+
+parameter_group_member <- unique(parameter_group_member)
+```
+
+## Export
+```{r}
+# Export the three tables for database import.
+write.csv(parameter_table, "parameter_table.csv", row.names = FALSE)
+write.csv(group_table, "parameter_group.csv", row.names = FALSE)
+write.csv(parameter_group_member, "parameter_group_member.csv", row.names = FALSE)
+```
+
+## Review of group assignments
+```{r}
+# Join the tables for manual review of group assignments
+group_review <- merge(parameter_group_member,group_table,by = "group_id")
+group_review <- merge(group_review,parameter_table,by = "parameter_stable_id")
+group_review <- group_review[
+  order(group_review$group_id, group_review$parameter_name),
+]
+
+#View(group_review)
+```
+

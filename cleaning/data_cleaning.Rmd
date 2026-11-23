@@ -1,0 +1,960 @@
+---
+title: "DCDM_data_cleaning"
+output:
+  html_document: default
+  pdf_document: default
+date: "2026-11-13"
+---
+## Prepare the SOP
+```{r}
+SOP <- read.csv("../raw/IMPC_SOP_2026.csv")
+
+#View(SOP)
+# Update the SOP limits based on the supplied remarks and examples.
+SOP[1,3] <- 12
+SOP[1,4] <- 12
+SOP[4,4] <- 26
+SOP[10,4] <-20
+
+write.csv(SOP, file="SOP_clean.csv",row.names = FALSE)
+```
+## Extract allowed values from SOP remarks
+```{r}
+SOP_clean <- read.csv("SOP_clean.csv")
+#View(SOP_clean)
+
+remarks <- as.character(SOP_clean$remarks)
+extract_remarkslist <- function(remarks,field){
+  if (grepl("Values are", remarks)){
+    valid <- sub(".*Values are[:]?\\s*","",remarks)
+# Extract allowed values from SOP remarks; mouse_life_stage uses semicolons and other fields use commas.
+    if(field == "mouse_life_stage"){
+      valids <- trimws(strsplit(valid, ";")[[1]])
+    }else{
+      valids <- trimws(strsplit(valid, ",")[[1]])
+    }
+    valids <- gsub("\\.\\s*$", "", valids)
+    valids <- trimws(valids)
+    return(valids)
+  }else{
+    return(NA)
+  }
+}
+
+remark_list <- setNames(
+  mapply(extract_remarkslist, SOP_clean$remarks, SOP_clean$dataField, SIMPLIFY = FALSE),
+  SOP_clean$dataField
+)
+```
+## Set input and output paths
+```{r}
+data <- list.files(path = "../raw/group6_data/group6_data/", pattern = "*.csv", full.names = TRUE, recursive = FALSE)
+clean_directory <- "clean_data"
+error_directory <- "clean_error"
+
+if(!dir.exists(clean_directory)){
+  dir.create(clean_directory, recursive = TRUE)
+}
+if(!dir.exists(error_directory)){
+  dir.create(error_directory, recursive = TRUE)
+}
+
+valid_lacz <- remark_list[["lacz_*"]]
+valid_strain_name <- remark_list[["strain_name"]]
+valid_mouse_life_stage <-remark_list[["mouse_life_stage"]]
+valid_hyphen_gene <- c("H2-M5", "H2-Q10", "Hbb-bh2", "Krtap17-1", "Pphln1-ps1")
+```
+## SOP validation function
+```{r}
+data_SOP <- function(df, SOP_clean, remark_list, valid_lacz) {
+  fields <- as.character(df[, 1])
+  values <- as.character(df[, 2])
+  
+  error_clean <- data.frame(
+  file_name = character(),
+  field = character(),
+  error_value = character(),
+  error_reason = character(),
+  stringsAsFactors = FALSE
+)
+  
+  file_has_error <-FALSE
+  current_gene_symbol <- if ("gene_symbol"%in%fields) {
+    values[fields == "gene_symbol"][1]
+  }else {
+    NA
+  }
+  
+  fields[fields == "parameter_stable_id"] <- "parameter_id"
+  fields[fields == "p_value"] <- "pvalue"
+  
+# Check for blank field names and the expected number of fields.
+  empty_field <- which(is.na(fields) | trimws(fields) == "")
+  if (length(empty_field)>0){
+    file_has_error <- TRUE
+    error_clean <- rbind(error_clean, data.frame(
+      file_name = "", field = "(empty)", error_value = values[empty_field[1]],error_reason = "missing field"
+    ))
+  }
+  if(length(fields) < 20){
+    file_has_error <- TRUE
+    error_clean <- rbind(error_clean, data.frame(
+      file_name = "", field = "(structure)", error_value = NA,error_reason = "total fields < 20"
+    ))
+  }
+# Count the lacZ result fields by their shared field-name prefix.
+  lacz_count <- length(grep("^lacz_", fields))
+  if(lacz_count < 11){
+    file_has_error <- TRUE
+    error_clean <- rbind(error_clean, data.frame(
+      file_name = "", field = "(structure)", error_value = NA,error_reason = "lacz fields < 11"
+    ))
+  }
+  
+  for (j in 1:nrow (SOP_clean)) {
+    field <- SOP_clean$dataField[j]
+    type <- SOP_clean$dataType[j]
+    min <- as.numeric(SOP_clean$minValue[j])
+    max <- as.numeric(SOP_clean$maxValue[j])
+    
+    if(field == "lacz_*"){
+# Find each lacZ field so its value can be checked against the SOP list.
+      lacz_fields <- grep("^lacz_", fields, value = TRUE)
+      if(length(lacz_fields) == 0){
+        file_has_error <- TRUE
+        error_clean <- rbind(error_clean, data.frame(
+          file_name =  "", field = field,error_value = NA, error_reason = "missing all lacz"
+        ))
+      }else{
+        for ( lacz in lacz_fields){
+          value <- values[fields == lacz][1]
+          if (is.na(value)) next
+          if (!(value %in% valid_lacz)){
+           file_has_error <- TRUE
+           error_clean <- rbind(error_clean, data.frame(
+             file_name = "", field = lacz, error_value = value, error_reason = "not in remarklist"))
+          }
+        }
+      }
+    }else{
+      if (!(field%in%fields)){
+        file_has_error <- TRUE
+        error_clean <- rbind(error_clean, data.frame(
+          file_name = "", field=field,error_value = NA,error_reason = "missing field"
+        ))
+      }else{
+        allvalue <- values[fields == field][1]
+        if (field == "gene_symbol" &&(is.na(allvalue) || trimws(allvalue) == "")) {
+  file_has_error <- TRUE
+  error_clean <- rbind(error_clean, data.frame(
+    file_name = "",field = field,error_value = allvalue,error_reason = "missing gene_symbol"
+  ))
+  next
+}
+        if (is.na(allvalue)) next
+        if (type == "Float"){
+          has_space <- (allvalue != trimws(allvalue))
+          number_value <- as.numeric(allvalue)
+          if (has_space){
+            file_has_error <- TRUE
+        error_clean <- rbind(error_clean, data.frame(
+          file_name = "", field = field, error_value = allvalue,error_reason = "numeric value contains leading or trailing spaces"
+        ))
+          }
+          else if (is.na(number_value)){
+            file_has_error <- TRUE
+            error_clean <-rbind(error_clean, data.frame(
+          file_name = "", field=field,error_value = allvalue, error_reason = "not a valid number"
+        ))
+          }else if (!(number_value >= min & number_value <=max )){
+            file_has_error <- TRUE
+            error_clean <- rbind(error_clean, data.frame(
+              file_name = "", field=field,error_value = allvalue,error_reason = "not in range"
+        ))
+          }
+        }else if (type == "String"){
+        if (field == "analysis_id"){
+            valid_id <- grepl("^an[0-9]+$", allvalue)
+            valid_len <- isTRUE(nchar(allvalue) >= min && nchar(allvalue) <= max)
+            if (!valid_id||!valid_len){
+               file_has_error <- TRUE 
+               error_clean <- rbind(error_clean, data.frame(
+              file_name="", field = field,error_value = allvalue, error_reason = "invalid analysis_id"))
+            }
+          }else if (field == "gene_accession_id"){
+            valid_id <- grepl("^MGI:[0-9]+$", allvalue)
+            valid_len <- isTRUE(nchar(allvalue) >= min && nchar(allvalue) <= max)
+            if (!valid_id||!valid_len){
+               file_has_error <- TRUE
+               error_clean <- rbind(error_clean, data.frame(
+              file_name="", field = field,error_value = allvalue, error_reason = "invalid gene_accession_id"))
+            }
+          }else if (field == "parameter_id"){
+# Match the accepted parameter ID structures, including M-G-P IDs.
+            valid_id <-
+  grepl("^[A-Z][A-Z0-9]*_[A-Z]{3}(_[0-9]{3}){2,3}$", allvalue) ||
+  grepl("^ESLIM(_[0-9]{3}){3}$", allvalue) ||
+  grepl("^M-G-P(_[0-9]{3}){3}$", allvalue)
+            valid_len <- isTRUE(nchar(allvalue) >= min && nchar(allvalue) <= max)
+            
+            if (!valid_id || !valid_len ){
+               file_has_error <- TRUE
+               error_clean <- rbind(error_clean, data.frame(
+              file_name="", field = field,error_value = allvalue, error_reason = "invalid parameter_id"))
+            }
+          }else if (field == "strain_name" || field == "mouse_life_stage"){
+            valid_list <- remark_list[[field]]
+            if (!(allvalue %in% valid_list)) {
+              file_has_error <- TRUE
+              error_clean <- rbind(error_clean, data.frame(
+                file_name = "", field = field,error_value = allvalue,error_reason = "value not in remark_list"
+              ))
+            }
+          }else if (field == "allele_symbol") {
+
+  if (is.na(current_gene_symbol) || !nzchar(current_gene_symbol)) {
+    file_has_error <- TRUE
+    error_clean <- rbind(error_clean, data.frame(
+      file_name = "",field = field,error_value = allvalue,error_reason = "not match gene_symbol"
+    ))
+
+  } else {
+    valid_symbol <- !is.na(allvalue) &&grepl("^[A-Za-z0-9<>().-]+$", allvalue)
+    valid_len <- !is.na(allvalue) &&isTRUE(nchar(allvalue) >= min && nchar(allvalue) <= max)
+    open_match <- !is.na(allvalue) &&startsWith(allvalue, paste0(current_gene_symbol, "<"))
+    valid_format <- FALSE
+
+    if (open_match) {
+  allele_part <- substring(allvalue, nchar(current_gene_symbol) + 2L)
+# The allele body may use targeted-mutation (tm) or gene-trap (Gt) notation.
+  targeted_allele_format <- grepl("^(tm[0-9]+[a-z]?(\\.[0-9]+)?(\\([A-Z0-9]+\\))?[A-Z][a-z0-9]*)>$",allele_part)
+  gene_trap_format <- grepl("^Gt\\([A-Z0-9]+\\)[A-Z][a-z0-9]*>$",allele_part)
+  valid_format <- targeted_allele_format || gene_trap_format
+}
+
+    if (!valid_len || !valid_symbol) {
+      file_has_error <- TRUE
+      error_clean <- rbind(error_clean, data.frame(
+        file_name = "",field = field,error_value = allvalue,error_reason = "not in range"))
+    }
+
+    if (!open_match || !valid_format) {
+      file_has_error <- TRUE
+      error_clean <- rbind(error_clean, data.frame(
+        file_name = "",field = field,error_value = allvalue,error_reason = "not meet the remark"
+      ))
+    }
+  }
+} else if (field == "gene_symbol"){
+  if (grepl("^[0-9]", allvalue)) {
+  file_has_error <- TRUE
+  error_clean <- rbind(error_clean, data.frame(
+    file_name = "", field = field, error_value = allvalue,error_reason = "numeric-leading gene_symbol: round3 review"
+  ))
+} else {
+# Check the gene-symbol case pattern or an approved symbol that contains hyphens.
+  valid_symbol <- grepl("^[A-Z][a-z0-9]*([0-9][A-Z][a-z][a-z0-9]*)?$",allvalue) || allvalue %in% valid_hyphen_gene
+  valid_len <- isTRUE(nchar(allvalue) >= min && nchar(allvalue) <= max)
+            if(!valid_symbol||!valid_len){
+              file_has_error <- TRUE
+              error_clean <- rbind(error_clean, data.frame(
+              file_name="", field = field,error_value = allvalue, error_reason = "invalid gene_symbol"))
+            }
+       }
+  }else{
+    len <- nchar(allvalue)
+    if(is.na(len) || len < min || len > max){
+      file_has_error <- TRUE
+      error_clean <- rbind(error_clean, data.frame(
+        file_name = "", field = field,error_value = allvalue,error_reason = "length not in range"
+      ))
+          }
+        }
+      }
+    }
+  }
+}
+  return(list(file_has_error = file_has_error, error_clean = error_clean))
+    }
+```
+## Round 1: validate raw files
+```{r}
+error_clean_1 <- data.frame(
+  file_name = character(),
+  field = character(),
+  error_value = character(),
+  error_reason = character(),
+  stringsAsFactors = FALSE
+)
+
+for (i in data){
+  theData <- read.csv(i, stringsAsFactors = FALSE, header = FALSE)
+  result <- data_SOP(theData,SOP_clean, remark_list, valid_lacz)
+  
+  if (!result$file_has_error) {
+  file.copy(i, file.path(clean_directory, basename(i)), overwrite = TRUE)
+} else {
+  result$error_clean$file_name <- basename(i)
+  error_clean_1 <- rbind(error_clean_1, result$error_clean)
+  file.copy(i, file.path(error_directory, basename(i)), overwrite = TRUE)
+}
+}
+
+
+write.csv(error_clean_1,"error_summary_1.csv",row.names = FALSE)
+
+#View(error_clean_1)
+```
+## Review round1 errors
+```{r}
+library(dplyr)
+error_clean_1 <- read.csv("error_summary_1.csv")
+error_clean_1 %>%group_by(field, error_reason) %>%summarise(count = n(), .groups = "drop") %>%arrange(desc(count))
+```
+## Round 2: clean formatting errors
+```{r}
+error_clean_2 <- data.frame(
+  file_name = character(),
+  field = character(),
+  error_value = character(),
+  error_reason = character(),
+  stringsAsFactors = FALSE
+)
+
+error_files <- list.files(error_directory, pattern = "*.csv", full.names = TRUE, recursive = FALSE)
+
+if (length(error_files) == 0) {
+  cat("no error files")
+} else {
+  
+  for (file in error_files) {
+    filename <- basename(file)
+    
+    error_1 <- read.csv(file, stringsAsFactors = FALSE, header = FALSE)
+    fields <- as.character(error_1[,1])
+    values <- as.character(error_1[,2])
+# Use the SOP field names for cleaning while keeping the source labels intact.
+    fields[fields == "parameter_stable_id"] <- "parameter_id"
+    fields[fields == "p_value"] <- "pvalue"
+    
+    current_gene_symbol <- if ("gene_symbol" %in% fields) values[fields == "gene_symbol"][1] else NA
+# Fill a missing gene symbol from the allele symbol prefix when available.
+    if ((is.na(current_gene_symbol) || !nzchar(trimws(current_gene_symbol))) &&"allele_symbol" %in% fields) {
+  allele_value <- values[fields == "allele_symbol"][1]
+  
+  if (!is.na(allele_value) && grepl("<", allele_value, fixed = TRUE)) {
+    current_gene_symbol <- sub("<.*$", "", trimws(allele_value))
+    values[fields == "gene_symbol"] <- current_gene_symbol
+  }
+}
+    
+    for (k in 1:length(fields)) {
+      field <- fields[k]
+      value <- values[k]
+      if (is.na(value)) next
+      
+    if (field == "pvalue"){
+      clean_value <- trimws(value)
+      num <- as.numeric(clean_value)
+
+        if (!is.na(num) && (num < 0 || num > 1)) {
+          values[k] <- NA_character_
+        }else {
+      values[k] <- clean_value
+    } 
+      }else if (field == "analysis_id"){
+# Remove accidental trailing backslashes from the analysis identifier.
+        values[k] <- gsub("\\\\+\\s*$", "", value)
+      }else if (field == "gene_accession_id"){
+# Keep the MGI accession and discard any trailing accidental characters.
+        values[k] <- sub("^(MGI:[0-9]+).*$", "\\1", value)
+      }else if (grepl("^lacz_", field) ) {
+# Remove unexpected punctuation, then use the matching SOP value when available.
+        clean_value <- trimws(gsub("[^A-Za-z ]", "", value))
+        match_idx <- which(tolower(valid_lacz) == tolower(clean_value))
+        if (length(match_idx) > 0) {
+          values[k] <- valid_lacz[match_idx[1]]
+        } else {
+          values[k] <- clean_value
+        }
+      } else if(field == "strain_name"){
+# Remove characters outside the expected strain-name alphabet before matching.
+        clean_value <- trimws(gsub("[^A-Za-z0-9/<>;\\-]", "", value))
+        match_idx <- which(tolower(valid_strain_name) == tolower(clean_value))
+        if (length(match_idx) > 0) {
+          values[k] <- valid_strain_name[match_idx[1]]
+        }
+        }else if(field == "mouse_life_stage"){
+# Keep letters, digits, spaces, and periods, then normalize repeated periods.
+        clean_value <- trimws(gsub("[^A-Za-z0-9\\. ]", "", value))
+# Keep periods as age separators when the stage contains numbers; remove them from stages without numbers.
+        if(grepl("[0-9]", clean_value)){
+          clean_value <- gsub("^([A-Za-z])\\.+", "\\1", clean_value)
+          clean_value <- gsub("\\.+", ".", clean_value)
+          clean_value <- gsub("\\.$", "", clean_value)
+        }else{clean_value <- gsub("\\.", "", clean_value)
+        }
+        match_idx <- which(tolower(valid_mouse_life_stage) == tolower(clean_value))
+        if (length(match_idx) > 0) {
+          values[k] <- valid_mouse_life_stage[match_idx[1]]
+        }
+        } else if (field == "gene_symbol") {
+# Clean the symbol, preserve approved hyphens, and normalize all-capital names.
+  if (!is.na(current_gene_symbol)) {
+    current_gene_symbol <- gsub("[^A-Za-z0-9-]", "", current_gene_symbol)
+    hyphen_idx <- match(tolower(current_gene_symbol), tolower(valid_hyphen_gene))
+
+    if (is.na(hyphen_idx)) {
+      current_gene_symbol <- gsub("-", "", current_gene_symbol, fixed = TRUE)
+    } else {
+      current_gene_symbol <- valid_hyphen_gene[hyphen_idx]
+    }
+
+    current_gene_symbol <- paste0(
+      toupper(substring(current_gene_symbol, 1, 1)),
+      substring(current_gene_symbol, 2)
+    )
+    values[fields == "gene_symbol"] <- current_gene_symbol
+  }
+} else if (field == "allele_symbol") {
+# Keep allele punctuation, parentheses, and angle brackets while removing other symbols.
+  allele_symbol <- gsub("[^A-Za-z0-9<>().-]", "", value)
+# Add the current gene symbol when a tm allele value is missing its gene prefix.
+  if (!is.na(current_gene_symbol) && !grepl("<", allele_symbol, fixed = TRUE) && grepl("^tm[0-9].*>$", allele_symbol, ignore.case = TRUE)) {
+    allele_symbol <- paste0(current_gene_symbol, "<", allele_symbol)
+  }
+
+  if (grepl("^[^<>]*<[^<>]+>$", allele_symbol)) {
+    gene_part   <- sub("<.*$", "", allele_symbol)
+    allele_part <- sub("^[^<]*<", "", allele_symbol)
+    allele_part <- sub(">$", "", allele_part)
+# Normalize accidental punctuation around the allele type, project, and lab code.
+    allele_clean <- gsub("[^A-Za-z0-9.]", "", allele_part)
+    allele_clean <- gsub("\\.{2,}", ".", allele_clean)
+    allele_clean <- gsub("\\.([A-Za-z])", "\\1", allele_clean)
+    allele_clean <- sub("^tm\\.", "tm", allele_clean, ignore.case = TRUE)
+    allele_clean <- sub("\\.$", "", allele_clean)
+# Split the recognized tm allele into its type, project, and lab code.
+    parts <- regmatches(allele_clean, regexec(
+      "^(tm[0-9]+[a-z]?(?:\\.[0-9]+)?)(KOMP|EUCOMM)?(WTSI|VLCG|HMGU|MBP|MFGC|NARL|TIGM|J)$",
+      allele_clean, ignore.case = TRUE, perl = TRUE
+    ))[[1]]
+
+    if (length(parts) == 4) {
+      project <- if (nzchar(parts[3])) paste0("(", toupper(parts[3]), ")") else ""
+      lab     <- paste0(toupper(substr(parts[4], 1, 1)), tolower(substring(parts[4], 2)))
+      allele_part <- paste0(tolower(parts[2]), project, lab)
+    }
+
+    if (!is.na(current_gene_symbol) && nzchar(current_gene_symbol)) {
+      gene_part <- current_gene_symbol
+    }
+    values[k] <- paste0(gene_part, "<", allele_part, ">")
+  } else {
+    values[k] <- allele_symbol
+  }
+  
+} else if (field == "parameter_id") {
+# Standardize the ID characters and repair split numeric groups.
+  clean_value <- toupper(value)
+  clean_value <- gsub("[^A-Z0-9_]", "", clean_value)
+  clean_value <- gsub("_{2,}", "_", clean_value)
+  clean_value <- gsub("^_+|_+$", "", clean_value)
+
+  repeat {
+    repaired <- gsub("_([0-9]{1,2})_([0-9]{1,2})(?=_|$)", "_\\1\\2", clean_value, perl = TRUE)
+    if (identical(repaired, clean_value)) break
+    clean_value <- repaired
+  }
+  
+  clean_value <- sub("^([A-Z]{1,3})_([A-Z]{1,3})_([A-Z]{3})_", "\\1\\2_\\3_", clean_value)
+  clean_value <- sub("^([A-Z]+)_([A-Z]{1,2})_([A-Z]{1,2})_", "\\1_\\2\\3_", clean_value)
+  clean_value <- sub("^ESL_IM_", "ESLIM_", clean_value)
+# Restore M-G-P hyphens only for IDs followed by three groups of three digits; other suffixes do not match this rule.
+  clean_value <- sub("^M_?G_?P_([0-9]{3}_[0-9]{3}_[0-9]{3})$", "M-G-P_\\1", clean_value)
+
+  values[k] <- clean_value
+}
+}
+# Save the cleaned values, then recheck the whole file against the SOP.
+   error_1[, 2] <- values
+   result_2 <- data_SOP(error_1, SOP_clean, remark_list, valid_lacz)
+   if (!result_2$file_has_error){
+     write.table(error_1, file.path(clean_directory, filename),sep = ",", row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+     file.remove(file)
+}else{file.remove(file)
+  write.table(error_1, file.path(error_directory, filename),sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+  result_2$error_clean$file_name <- filename
+  error_clean_2 <- rbind(error_clean_2, result_2$error_clean)
+}
+  }
+}
+write.csv(error_clean_2, "error_summary_2.csv", row.names = FALSE)
+#View(error_clean_2)
+```
+## Review round2 errors
+```{r}
+error2_review <- read.csv("error_summary_2.csv", stringsAsFactors = FALSE)
+error2_review %>%count(field, error_reason, sort = TRUE)
+error2_review %>%filter(field == "gene_symbol") %>%count(error_value, sort = TRUE)
+```
+## Round 3: review gene symbols and remaining errors
+```{r}
+error_clean_3 <- data.frame(
+  file_name = character(),
+  field = character(),
+  error_value = character(),
+  error_reason = character(),
+  stringsAsFactors = FALSE
+)
+
+error_files <- list.files(error_directory, pattern = "*.csv", full.names = TRUE, recursive = FALSE)
+
+if(length(error_files) == 0){
+  cat("no error files")
+}
+
+round3_valid_gene <- c(
+  "AB124611", "AI467606", "AI837181", "AU021092", "BC048562",
+  "A830005F24Rik", "D130043K22Rik","D630023F18Rik", "D930020B18Rik"
+)
+round3_valid_gene <- c(
+  round3_valid_gene,
+  "1700029H14Rik","2510002D24Rik","4921509C19Rik"
+)
+
+for (file in error_files) {
+  filename <- basename(file)
+    error_2 <- read.csv(file, stringsAsFactors = FALSE, header = FALSE)
+    
+    idx <- which(error_2[, 1] == "gene_symbol")
+if (length(idx) == 1) {
+  old <- as.character(error_2[idx, 2])
+# Normalize all-capital symbols except the approved list and H2 names excluded from this rule.
+  if (!is.na(old) &&grepl("^[A-Z][A-Z0-9]*$", old) &&!(old %in% round3_valid_gene) &&!grepl("^H2[MQ][0-9]+$", old)) {
+    new <- paste0(substr(old, 1, 1), tolower(substring(old, 2)))
+    error_2[idx, 2] <- new
+    allele_idx <- which(error_2[, 1] == "allele_symbol")
+    if (length(allele_idx) == 1 &&!is.na(error_2[allele_idx, 2]) &&startsWith(error_2[allele_idx, 2], paste0(old, "<"))) {
+      error_2[allele_idx, 2] <- paste0(new, substring(error_2[allele_idx, 2], nchar(old) + 1))
+    }
+  }
+}
+    result_3 <- data_SOP(error_2, SOP_clean, remark_list, valid_lacz)
+# Exempt only approved gene-symbol errors; other fields in the file still need to pass.
+    rik_ok <- grepl("^([0-9]{7}|[A-Z][0-9]{6})[A-Z][0-9]{2}Rik$",result_3$error_clean$error_value)
+
+ignore <- result_3$error_clean$field == "gene_symbol" &(result_3$error_clean$error_value %in% round3_valid_gene | rik_ok)
+result_3$error_clean <- result_3$error_clean[!ignore, , drop = FALSE]
+result_3$file_has_error <- nrow(result_3$error_clean) > 0
+    
+if (!result_3$file_has_error){
+  write.table(error_2, file.path(clean_directory, filename), sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+      file.remove(file)
+}else {
+  write.table(error_2, file, sep = ",",row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+  result_3$error_clean$file_name <- filename
+  error_clean_3 <- rbind(error_clean_3, result_3$error_clean)
+}
+}
+
+write.csv(error_clean_3, "error_summary_3.csv", row.names = FALSE)
+#View(error_clean_3)
+```
+## Review round3 errors
+```{r}
+error3_review <- read.csv("error_summary_3.csv", stringsAsFactors = FALSE)
+error3_review %>%count(field, error_reason, sort = TRUE)
+error3_review %>%filter(field == "gene_symbol")%>%count(error_value, sort = TRUE)
+```
+## Round 4: Apply manual corrections
+```{r}
+# Correct a misspelled lacZ field name.
+an1005322386<- read.csv("clean_error/an1005322386.csv",header = FALSE)
+#View(an1005322386)
+idx <- which(an1005322386[, 1] == "laczLiver")
+if (length(idx) > 0){
+  an1005322386[idx, 1] <- "lacz_liver"
+}
+write.table(an1005322386, "clean_error/an1005322386.csv", sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+
+an1176139622<- read.csv("clean_error/an1176139622.csv",header = FALSE)
+#View(an1176139622)
+fields <- as.character(an1176139622[, 1])
+values <- as.character(an1176139622[, 2])
+idx <-which(is.na(fields) | trimws(fields) == "")
+if (length(idx) > 0){
+  valid_stage <- tolower(trimws(values[idx])) %in% tolower(valid_mouse_life_stage)
+  fields[idx[valid_stage]] <- "mouse_life_stage"
+}
+an1176139622[, 1] <- fields
+write.table(an1176139622, "clean_error/an1176139622.csv", sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+
+# Restore the analysis ID from the filename because this record has no analysis_id row.
+an1251739958<- read.csv("clean_error/an1251739958.csv",header = FALSE)
+#View(an1251739958)
+if (!("analysis_id" %in% an1251739958[, 1])){
+  an1251739958 <- rbind(an1251739958, data.frame(
+    V1 = "analysis_id", 
+    V2 = "an1251739958", 
+    stringsAsFactors = FALSE
+  ))
+}
+write.table(an1251739958, "clean_error/an1251739958.csv",sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+
+# Replace the recorded strain with the closest value from the SOP list.
+an1417460674<- read.csv("clean_error/an1417460674.csv",header = FALSE)
+#View(an1417460674)
+print(valid_strain_name)
+idx <- which(an1417460674[, 1] == "strain_name")
+if (length(idx) > 0){
+  old_strain <- an1417460674[idx, 2]
+  dists <- adist(tolower(old_strain), tolower(valid_strain_name))
+  best_match <- valid_strain_name[which.min(dists)]
+  an1417460674[idx, 2] <- best_match
+}
+write.table(an1417460674, "clean_error/an1417460674.csv",sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+
+# This is the only missing field name in the file, so restore it as lacz_vascular_system.
+an1625346500<- read.csv("clean_error/an1625346500.csv",header = FALSE)
+#View(an1625346500)
+idx <- which(is.na(an1625346500[, 1]) | trimws(an1625346500[, 1]) == "")
+if (length(idx) > 0){
+  empty_val <- trimws(an1625346500[idx, 2])
+  if (empty_val == "tissue not available"){
+    an1625346500[idx, 1] <- "lacz_vascular_system"
+  }
+}
+write.table(an1625346500, "clean_error/an1625346500.csv",sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+
+# Correct the field-name spelling for the parameter stable ID.
+an1726684876<- read.csv("clean_error/an1726684876.csv",header = FALSE)
+#View(an1726684876)
+idx <- which(an1726684876[, 1] == "parameterStableId")
+if (length(idx) > 0){
+  an1726684876[idx, 1] <- "parameter_stable_id"
+}
+write.table(an1726684876, "clean_error/an1726684876.csv", sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+
+# Fill the missing accession only when both gene and allele symbols match the checked record.
+an2172635002<- read.csv("clean_error/an2172635002.csv",header = FALSE)
+#View(an2172635002)
+gene_idx <- which(an2172635002[, 1] == "gene_symbol")
+allele_idx <- which(an2172635002[, 1] == "allele_symbol")
+id_idx <- which(an2172635002[, 1] == "gene_accession_id")
+if (length(gene_idx) == 1L &&
+    length(allele_idx) == 1L &&
+    length(id_idx) == 1L &&
+    an2172635002[gene_idx, 2] == "Rbmx" &&
+    an2172635002[allele_idx, 2] == "Rbmx<tm2b(KOMP)Wtsi>") {
+  an2172635002[id_idx, 2] <- "MGI:1343044"
+} 
+write.table(an2172635002, "clean_error/an2172635002.csv", sep = ",", row.names = FALSE, col.names = FALSE, quote = TRUE, na = "NA")
+
+# Fill a missing gene symbol only when its MGI accession identifies the gene.
+an1320537115 <- read.csv("clean_error/an1320537115.csv", header = FALSE)
+#View(an1320537115)
+idx <- which(an1320537115[, 1] == "gene_symbol")
+id_idx <- which(an1320537115[, 1] == "gene_accession_id")
+if (length(idx) == 1L && length(id_idx) == 1L &&
+    identical(an1320537115[id_idx, 2], "MGI:109331") &&
+    is.na(an1320537115[idx, 2])) {
+  an1320537115[idx, 2] <- "Nxn"
+} 
+write.table(an1320537115, "clean_error/an1320537115.csv",sep = ",", row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+
+# Apply the manually checked gene and allele symbols for this record.
+an3461280640 <- read.csv("clean_error/an3461280640.csv", header = FALSE)
+#View(an3461280640)
+gene_symbol_rows <- which(an3461280640[, 1] == "gene_symbol")
+allele_symbol_rows <- which(an3461280640[, 1] == "allele_symbol")
+if (length(gene_symbol_rows) == 1) {
+  an3461280640[gene_symbol_rows, 2] <- "2510002D24Rik"
+}
+if (length(allele_symbol_rows) == 1) {
+  an3461280640[allele_symbol_rows, 2] <- "2510002D24Rik<tm1.1(KOMP)Vlcg>"
+}
+write.table(an3461280640, "clean_error/an3461280640.csv",sep = ",", row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+
+# Fill these missing gene symbols using their checked MGI accession IDs.
+an3684399182 <- read.csv("clean_error/an3684399182.csv", header = FALSE)
+#View(an3684399182)
+idx <- which(an3684399182[, 1] == "gene_symbol")
+id_idx <- which(an3684399182[, 1] == "gene_accession_id")
+if (length(idx) == 1L && length(id_idx) == 1L &&
+    identical(an3684399182[id_idx, 2], "MGI:1336167") &&
+    is.na(an3684399182[idx, 2])) {
+  an3684399182[idx, 2] <- "Prkab1"
+} 
+write.table(an3684399182, "clean_error/an3684399182.csv",sep = ",", row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+
+an3887018626 <- read.csv("clean_error/an3887018626.csv", header = FALSE)
+#View(an3887018626)
+idx <- which(an3887018626[, 1] == "gene_symbol")
+id_idx <- which(an3887018626[, 1] == "gene_accession_id")
+if (length(idx) == 1L && length(id_idx) == 1L &&
+    identical(an3887018626[id_idx, 2], "MGI:1336167") &&
+    is.na(an3887018626[idx, 2])) {
+  an3887018626[idx, 2] <- "Prkab1"
+}
+write.table(an3887018626, "clean_error/an3887018626.csv",sep = ",", row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+
+an4593692734 <- read.csv("clean_error/an4593692734.csv", header = FALSE)
+#View(an4593692734)
+idx <- which(an4593692734[, 1] == "gene_symbol")
+id_idx <- which(an4593692734[, 1] == "gene_accession_id")
+if (length(idx) == 1L && length(id_idx) == 1L &&
+    identical(an4593692734[id_idx, 2], "MGI:1336993") &&
+    is.na(an4593692734[idx, 2])) {
+  an4593692734[idx, 2] <- "Ap4e1"
+} 
+write.table(an4593692734, "clean_error/an4593692734.csv",sep = ",", row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+
+an5153605881 <- read.csv("clean_error/an5153605881.csv", header = FALSE)
+#View(an5153605881)
+idx <- which(an5153605881[, 1] == "gene_symbol")
+id_idx <- which(an5153605881[, 1] == "gene_accession_id")
+if (length(idx) == 1L && length(id_idx) == 1L &&
+    identical(an5153605881[id_idx, 2], "MGI:1336167") &&
+    is.na(an5153605881[idx, 2])) {
+  an5153605881[idx, 2] <- "Prkab1"
+} 
+write.table(an5153605881, "clean_error/an5153605881.csv",sep = ",", row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+
+an8237179968 <- read.csv("clean_error/an8237179968.csv", header = FALSE)
+#View(an8237179968)
+gene_symbol_rows <- which(an8237179968[, 1] == "gene_symbol")
+allele_symbol_rows <- which(an8237179968[, 1] == "allele_symbol")
+if (length(gene_symbol_rows) == 1) {
+  an8237179968[gene_symbol_rows, 2] <- "4921509C19Rik"
+}
+if (length(allele_symbol_rows) == 1) {
+  an8237179968[allele_symbol_rows, 2] <- "4921509C19Rik<tm1.1(KOMP)Vlcg>"
+}
+write.table(an8237179968, "clean_error/an8237179968.csv",sep = ",", row.names = FALSE, col.names = FALSE,quote = TRUE, na = "NA")
+
+```
+## Recheck Round 4 files against the SOP
+```{r}
+error_clean_4 <- data.frame(
+  file_name = character(),
+  field = character(),
+  error_value = character(),
+  error_reason = character(),
+  stringsAsFactors = FALSE
+)
+
+error_files <- list.files(
+  error_directory, pattern = "*.csv",
+  full.names = TRUE, recursive = FALSE
+)
+
+for (file in error_files) {
+  filename <- basename(file)
+  error_3 <- read.csv(file, header = FALSE, stringsAsFactors = FALSE)
+  result_4 <- data_SOP(error_3, SOP_clean, remark_list, valid_lacz)
+# Apply the same field-specific gene-symbol exemptions used in Round 3.
+  ignore <- result_4$error_clean$field == "gene_symbol" &result_4$error_clean$error_value %in% round3_valid_gene
+  result_4$error_clean <- result_4$error_clean[!ignore, , drop = FALSE]
+  result_4$file_has_error <- nrow(result_4$error_clean) > 0
+
+  if (!result_4$file_has_error) {
+    write.table(
+      error_3, file.path(clean_directory, filename),
+      sep = ",", row.names = FALSE, col.names = FALSE,
+      quote = TRUE, na = "NA"
+    )
+    file.remove(file)
+  } else {
+    result_4$error_clean$file_name <- filename
+    error_clean_4 <- rbind(error_clean_4, result_4$error_clean)
+  }
+}
+
+write.csv(error_clean_4, "error_summary_4.csv", row.names = FALSE)
+```
+## Review round4 errors
+```{r}
+error4_review <- read.csv("error_summary_4.csv", stringsAsFactors = FALSE)
+error4_review %>%count(field, error_reason, sort = TRUE)
+error4_review %>%filter(field == "gene_symbol")%>%count(error_value, sort = TRUE)
+```
+## Combine cleaned files
+```{r}
+library(tidyr)
+
+clean_files <- list.files("clean_data", pattern = "*.csv$", full.names = TRUE, recursive = FALSE)
+combinedcleanData <- data.frame()
+
+for (file in clean_files) {
+  #cat("Processing:", basename(file), "\n")
+  
+  cleandata <- read.csv(file, header = FALSE, stringsAsFactors = FALSE)
+  colnames(cleandata) <- c("field", "value")
+
+tcleanData <- cleandata %>%
+pivot_wider(
+    names_from = field,       
+    values_from = value,
+    values_fn = first
+  )
+combinedcleanData <- bind_rows(combinedcleanData, tcleanData)
+}
+
+write.csv(combinedcleanData, "combined_clean_data.csv", row.names = FALSE)
+#View(combinedcleanData)
+
+```
+## Remove exact duplicates and combine matching analysis IDs
+```{r}
+library(tidyr)
+
+combined_clean_data <- read.csv("combined_clean_data.csv", stringsAsFactors = FALSE)
+
+sum(duplicated(combined_clean_data$analysis_id))
+sum(duplicated(combined_clean_data))
+# Find IDs that still occur more than once after removing identical full rows.
+df_unique <- combined_clean_data %>% distinct()
+sum(duplicated(df_unique$analysis_id))
+sum(duplicated(df_unique))
+
+dup_ids <- df_unique %>%
+  count(analysis_id) %>%
+  filter(n > 1) %>%
+  pull(analysis_id)
+
+dup_rows <- df_unique %>%
+  filter(analysis_id %in% dup_ids) %>%
+  arrange(analysis_id)
+# Merge complementary values and mark differing values as conflicts.
+merged_dups <- dup_rows[0, , drop = FALSE]
+merged_dups[] <- lapply(merged_dups, as.character)
+# Collect all rows that share the current duplicated analysis ID.
+for (current_id in dup_ids) {
+  selected_rows <- dup_rows[
+    dup_rows$analysis_id == current_id,
+    ,
+    drop = FALSE
+  ]
+
+  merged_row <- selected_rows[1, , drop = FALSE]
+  merged_row[] <- lapply(merged_row, as.character)
+
+  for (column_name in names(selected_rows)) {
+    if (column_name != "analysis_id") {
+      column_values <- selected_rows[[column_name]]
+      column_values <- column_values[!is.na(column_values)]
+      column_values <- as.character(column_values)
+      column_values <- column_values[column_values != ""]
+      column_values <- unique(column_values)
+
+      if (length(column_values) == 0) {
+        merged_row[[column_name]] <- NA_character_
+      } else if (length(column_values) == 1) {
+        merged_row[[column_name]] <- column_values[1]
+      } else {
+        merged_row[[column_name]] <- paste(column_values, collapse = " | ")
+      }
+    }
+  }
+
+  merged_dups <- rbind(merged_dups, merged_row)
+}
+# Identify IDs whose duplicate records contain conflicting values.
+conflict_rows <- merged_dups[0, , drop = FALSE]
+perfectly_merged <- merged_dups[0, , drop = FALSE]
+
+for (i in 1:nrow(merged_dups)) {
+  has_conflict <- FALSE
+  for (column_name in names(merged_dups)) {
+    if (column_name != "analysis_id" &&grepl(" \\| ", merged_dups[i, column_name])) {
+      has_conflict <- TRUE
+    }
+  }
+  if (has_conflict) {
+    conflict_rows <- rbind(conflict_rows, merged_dups[i, , drop = FALSE])
+  } else {
+    perfectly_merged <- rbind(perfectly_merged, merged_dups[i, , drop = FALSE])
+  }
+}
+# Keep rows with unique analysis IDs and convert their columns to character
+# so they match the types in perfectly_merged before binding.
+clean_rows <- df_unique %>%filter(!(analysis_id %in% dup_ids))
+clean_rows[] <- lapply(clean_rows, as.character)
+
+final_clean_data <- clean_rows %>%bind_rows(perfectly_merged)
+
+write.csv(final_clean_data, "final_clean_data.csv", row.names = FALSE)
+if (nrow(conflict_rows) > 0) {
+  write.csv(conflict_rows, "conflict_manual_check.csv", row.names = FALSE)
+  cat("Warning: ", nrow(conflict_rows),
+      " conflicting analysis IDs found. See conflict_manual_check.csv.\n",
+      sep = "")
+} else {
+  cat("No conflicts found.\n")
+}
+cat("Final data rows: ", nrow(final_clean_data), "\n", sep = "")
+```
+
+## Check final data counts and SOP validity
+```{r}
+# Compare raw, clean, error, combined, and final record counts.
+raw_n    <- length(list.files("../raw/group6_data/group6_data", pattern = "*.csv"))
+clean_n  <- length(list.files("clean_data", pattern = "*.csv"))
+error_n  <- length(list.files("clean_error", pattern = "*.csv"))
+
+combined_check <- read.csv("combined_clean_data.csv", stringsAsFactors = FALSE)
+final_check    <- read.csv("final_clean_data.csv", stringsAsFactors = FALSE)
+
+source_ok   <- raw_n == clean_n + error_n
+combined_ok <- nrow(combined_check) == clean_n
+
+conflict_ids <- conflict_rows$analysis_id
+expected_final_ids <- setdiff(unique(combined_check$analysis_id), conflict_ids)
+final_ok <- !anyNA(final_check$analysis_id) && 
+            !any(final_check$analysis_id == "") && 
+            anyDuplicated(final_check$analysis_id) == 0 && 
+            nrow(final_check) == length(expected_final_ids) && 
+            setequal(final_check$analysis_id, expected_final_ids)
+
+final_errors <- data.frame(file_name=character(), field=character(), error_value=character(), error_reason=character())
+
+for (i in seq_len(nrow(final_check))) {
+# Keep missing values as NA, not the text "NA", during SOP validation.
+  row_values <- unlist(final_check[i, , drop = FALSE], use.names = FALSE)
+  row_long <- data.frame(
+  field = names(final_check),
+  value = as.character(row_values),
+  stringsAsFactors = FALSE
+)
+errors <- data_SOP(row_long, SOP_clean, remark_list, valid_lacz)$error_clean
+  
+  if (nrow(errors) > 0) {
+# Exempt only approved gene_symbol errors; errors in other fields still need to pass validation.
+    rik_ok   <- grepl("^([0-9]{7}|[A-Z][0-9]{6})[A-Z][0-9]{2}Rik$", errors$error_value)
+    approved <- errors$field == "gene_symbol" & (errors$error_value %in% round3_valid_gene | rik_ok)
+    errors   <- errors[!approved, , drop = FALSE]
+    
+    if (nrow(errors) > 0) {
+      errors$file_name <- final_check$analysis_id[i]
+      final_errors <- rbind(final_errors, errors)
+    }
+  }
+  if (i %% 2000L == 0L) message("Validated ", i, "/", nrow(final_check))
+}
+
+cat(sprintf("raw: %d | clean: %d | error: %d\n", raw_n, clean_n, error_n))
+cat(sprintf("combined: %d | final: %d | conflict IDs: %d\n", nrow(combined_check), nrow(final_check), length(conflict_ids)))
+cat(sprintf("source_ok: %s | combined_ok: %s | final_ok: %s\n", source_ok, combined_ok, final_ok))
+cat("error number in SOP:", nrow(final_errors), "\n")
+
+if (nrow(final_errors) > 0) {
+  print(head(final_errors, 30))
+  print(table(final_errors$field, final_errors$error_reason))
+} else if (source_ok && combined_ok && final_ok) {
+  cat("sucess\n")
+}
+```
+
+
+
