@@ -952,7 +952,7 @@ if (nrow(final_errors) > 0) {
   print(head(final_errors, 30))
   print(table(final_errors$field, final_errors$error_reason))
 } else if (source_ok && combined_ok && final_ok) {
-  cat("sucess\n")
+  cat("success\n")
 }
 ```
 
