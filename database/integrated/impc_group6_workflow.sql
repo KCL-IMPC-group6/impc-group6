@@ -2,7 +2,8 @@
 -- Fresh database build script
 -- Run on a new, empty MySQL database. Import the CSV files at the marked points.
 -- For final_clean_data.csv, map the literal NA marker to SQL NULL in DBeaver.
--- Run each INSERT/import once. Do not rerun this script against the populated session 2 database.
+-- Run each INSERT/import once, and do not use an already populated database.
+-- See README.md for the CSV paths and import settings.
 
 -- SECTION 1: Select the database
 
@@ -15,6 +16,11 @@ SHOW TABLES;
 
 
 -- SECTION 2: Create the staging table
+
+-- Load the cleaned data here first so we can check it before splitting it into tables.
+-- Column sizes follow the SOP and the cleaned data. Analysis IDs are 12 characters
+-- as stated in the SOP remarks. Allow 20 characters for lacZ (tissue not available)
+-- and 35 for strain names (the longest cleaned strain name has 26 characters).
 
 CREATE TABLE IF NOT EXISTS clean_data_staging (
     gene_accession_id VARCHAR(11),
@@ -43,9 +49,13 @@ CREATE TABLE IF NOT EXISTS clean_data_staging (
 -- into clean_data_staging before Section 3.
 -- In DBeaver's CSV import settings, set the null-value marker to NA.
 -- Verify that numeric p_value values represented by NA become SQL NULL.
+-- This keeps missing p-values separate from zero and avoids importing NA as text.
+-- Use the existing table, UTF-8, comma delimiter, double quotes and column headers.
 
 
 -- SECTION 3: Check the imported data
+
+-- Expect 27,983 rows, 267 missing p-values and 278 missing parameter IDs.
 
 SELECT COUNT(*) AS total_rows
 FROM clean_data_staging;
@@ -84,6 +94,8 @@ LIMIT 10;
 
 -- SECTION 6: Check IDs and names
 
+-- Check that each ID can identify its record before using it as a primary key.
+
 -- Check for gene IDs with more than one symbol
 SELECT gene_accession_id,
        COUNT(DISTINCT gene_symbol) AS symbol_count
@@ -118,6 +130,8 @@ CREATE TABLE IF NOT EXISTS genes (
 
 -- SECTION 8: Populate and check the genes table
 
+-- DISTINCT avoids storing the same gene for every analysis.
+
 INSERT INTO genes (gene_accession_id, gene_symbol)
 SELECT DISTINCT gene_accession_id, gene_symbol
 FROM clean_data_staging;
@@ -135,6 +149,8 @@ CREATE TABLE IF NOT EXISTS parameters (
 
 -- SECTION 10: Populate and check the parameters table
 
+-- Keep the supplied IDs, including M-G-P_ IDs. Do not invent IDs for missing values.
+
 INSERT INTO parameters (parameter_stable_id, parameter_name)
 SELECT DISTINCT parameter_stable_id, parameter_name
 FROM clean_data_staging
@@ -145,6 +161,8 @@ FROM parameters;
 
 
 -- SECTION 11: Create the alleles table
+
+-- Each allele is linked to its gene using the supplied MGI accession ID.
 
 CREATE TABLE IF NOT EXISTS alleles (
     allele_symbol VARCHAR(35) PRIMARY KEY,
@@ -175,6 +193,10 @@ FROM clean_data_staging;
 
 -- SECTION 14: Create the analyses table
 
+-- Each analysis has its own ID. The two-column foreign key checks that an allele
+-- belongs to the gene in the same analysis. The p-value check allows NULL but
+-- prevents values outside 0 to 1.
+
 CREATE TABLE IF NOT EXISTS analyses (
     analysis_id CHAR(12) PRIMARY KEY,
     gene_accession_id VARCHAR(11) NOT NULL,
@@ -195,6 +217,9 @@ CREATE TABLE IF NOT EXISTS analyses (
 
 
 -- SECTION 15: Populate the analyses table
+
+-- Keep the parameter name in the analysis if its stable ID is missing.
+-- This preserves the result without making up a parameter ID.
 
 INSERT INTO analyses (
     analysis_id,
@@ -238,6 +263,9 @@ FROM analyses;
 
 -- SECTION 17: Create a view showing parameter names
 
+-- LEFT JOIN keeps analyses without a parameter match. COALESCE uses the stored
+-- fallback name when the name from the parameters table is NULL.
+
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW v_analyses_parameters AS
 SELECT a.*,
        COALESCE(p.parameter_name, a.unlinked_parameter_name) AS parameter_name
@@ -276,6 +304,8 @@ VALUES
 
 -- SECTION 20: Create the LacZ results table
 
+-- Use the analysis ID and tissue name together so each tissue has one result per analysis.
+
 CREATE TABLE IF NOT EXISTS lacz_results (
     analysis_id CHAR(12) NOT NULL,
     tissue_name VARCHAR(32) NOT NULL,
@@ -289,6 +319,10 @@ CREATE TABLE IF NOT EXISTS lacz_results (
 
 
 -- SECTION 21: Populate and check the LacZ results
+
+-- Turn the 11 tissue columns into rows to avoid needing a separate column for
+-- each tissue. Keep NULL expression statuses as well as the recorded values.
+-- Expect 307,813 rows (11 per analysis).
 
 INSERT INTO lacz_results (analysis_id, tissue_name, expression_status)
 SELECT analysis_id, 'blood', lacz_blood FROM clean_data_staging
@@ -327,6 +361,9 @@ CREATE TABLE IF NOT EXISTS parameter_groups (
 
 
 -- SECTION 23: Create the parameter group membership table
+
+-- A parameter can belong to more than one group. The unique pair prevents
+-- the same parameter being added twice to the same group.
 
 CREATE TABLE IF NOT EXISTS parameter_group_membership (
     member_id INT PRIMARY KEY,
@@ -404,11 +441,10 @@ LIMIT 10;
 
 -- SECTION 25: Parameter group review
 
--- Images is a keyword-defined group covering imaging, morphology and related
--- measurements; some matches may be broader than image-based assays.
--- The grouping is exploratory and needs biological review against IMPC metadata.
--- The cleaning script also contains one nearest-SOP strain-name correction
--- (an1417460674) whose manual verification should be documented.
+-- Images includes morphology and body-composition measurements, not just image
+-- assays. Review the group against the IMPC metadata before interpreting it.
+-- The cleaned input also contains a nearest-SOP strain correction (an1417460674).
+-- The evidence for this correction belongs in the cleaning log.
 
 
 -- SECTION 26: Create the parameter description staging table
@@ -421,7 +457,9 @@ CREATE TABLE IF NOT EXISTS parameter_description_staging (
 );
 
 -- Import database/integrated/inputs/parameter_description_import.csv
--- into parameter_description_staging before Section 27 (5,325 rows).
+-- into parameter_description_staging now (5,325 rows), before running the checks below.
+-- For this and the remaining imports, preserve empty strings and whitespace.
+-- The SQL trims metadata when moving it into the main tables.
 
 -- Check the imported parameter descriptions
 
@@ -512,6 +550,10 @@ ORDER BY different_names DESC, different_descriptions DESC;
 
 -- SECTION 31: Create and populate the parameter metadata table
 
+-- A stable ID can have more than one original parameter ID. Keep the original
+-- ID as the primary key. Trim extra spaces and turn blank or NA descriptions
+-- into NULL; the original text stays in staging.
+
 CREATE TABLE IF NOT EXISTS parameter_metadata (
     impcParameterOrigId VARCHAR(20) PRIMARY KEY,
     parameter_stable_id VARCHAR(20),
@@ -566,6 +608,10 @@ LEFT JOIN parameter_metadata AS m
 
 -- SECTION 34: Create and populate the procedures table
 
+-- Use an internal numeric key for each procedure name, not a new IMPC identifier.
+-- The source descriptions stay in procedure_staging because some names have
+-- more than one description. Generated IDs can differ between builds.
+
 CREATE TABLE IF NOT EXISTS procedures (
     procedure_id INT AUTO_INCREMENT PRIMARY KEY,
     procedure_name VARCHAR(200) NOT NULL UNIQUE,
@@ -583,6 +629,9 @@ FROM procedures;
 
 
 -- SECTION 35: Link procedures to parameter metadata
+
+-- The original parameter ID is shared by the two supplied metadata files.
+-- Use it to find the procedure rather than guessing from the parameter name.
 
 ALTER TABLE parameter_metadata
 ADD COLUMN procedure_id INT;
@@ -723,6 +772,9 @@ FROM human_genes;
 
 -- SECTION 41: Link human genes to diseases, and diseases to genotype IDs
 
+-- A human gene can be associated with several diseases and a disease can
+-- be associated with several genes. The linking table keeps each pair once.
+
 CREATE TABLE IF NOT EXISTS human_gene_diseases (
     hgnc_id VARCHAR(20) NOT NULL,
     disease_id VARCHAR(20) NOT NULL,
@@ -737,6 +789,7 @@ FROM disease_staging;
 
 -- The source repeats the same genotype list for each human gene linked to a disease.
 -- Store each disease-genotype pair once. Keep the original strings in staging.
+-- These genotype IDs describe disease models, not confirmed matches to IMPC alleles.
 CREATE TABLE IF NOT EXISTS disease_genotypes (
     disease_id VARCHAR(20) NOT NULL,
     mouse_genotype_id VARCHAR(20) NOT NULL,
@@ -746,6 +799,7 @@ CREATE TABLE IF NOT EXISTS disease_genotypes (
         FOREIGN KEY (disease_id) REFERENCES diseases(disease_id)
 );
 
+-- JSON_TABLE splits the pipe-separated list into one genotype ID per row.
 INSERT INTO disease_genotypes (disease_id, mouse_genotype_id)
 SELECT DISTINCT d.disease_id, TRIM(jt.mouse_genotype_id)
 FROM disease_staging AS d
@@ -797,6 +851,9 @@ LIMIT 10;
 
 -- SECTION 43: Create the bespoke homology tables
 
+-- Store species separately so more can be added without new homology columns.
+-- Keep the supplied Ensembl genes even if they are not in our main IMPC dataset.
+
 CREATE TABLE IF NOT EXISTS bespoke_species (
     species_id INT PRIMARY KEY,
     species_name VARCHAR(50) NOT NULL UNIQUE
@@ -834,7 +891,8 @@ CREATE TABLE IF NOT EXISTS bespoke_homology (
 
 -- Import existing GitHub files from data/processed/bespoke/ in order:
 -- bespoke_species.csv, bespoke_gene.csv, bespoke_homology.csv.
--- Import into the existing tables, then proceed to Section 45.
+-- Import into bespoke_species, bespoke_gene and bespoke_homology respectively,
+-- before running the counts below. Then proceed to Section 45.
 
 -- Check how many records were imported
 
@@ -910,6 +968,10 @@ HAVING mgi_ids > 1 OR ensembl_ids > 1;
 
 
 -- SECTION 47: Create MGI to Ensembl gene mapping
+
+-- BINARY makes the symbol comparison case-sensitive. Keep only matches with
+-- one distinct Ensembl ID per MGI gene. These are provisional symbol matches,
+-- not confirmed identifier cross-references.
 
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW v_mouse_gene_matches AS
 
@@ -1027,6 +1089,9 @@ LIMIT 20;
 
 -- SECTION 52: Connect parameters to their metadata
 
+-- Link only matching stable IDs. This allows multiple metadata records for
+-- the same parameter and keeps unmatched parameters in the main table.
+
 CREATE TABLE IF NOT EXISTS parameter_metadata_links (
     parameter_stable_id VARCHAR(20) NOT NULL,
     impcParameterOrigId VARCHAR(20) NOT NULL,
@@ -1065,6 +1130,8 @@ FROM parameter_metadata_links;
 
 -- SECTION 53: Connect mouse genes to human disease genes
 
+-- Use the supplied MGI accession ID to connect the disease and IMPC datasets.
+
 CREATE TABLE IF NOT EXISTS mouse_human_gene_links (
     gene_accession_id VARCHAR(20) NOT NULL,
     hgnc_id VARCHAR(20) NOT NULL,
@@ -1101,6 +1168,8 @@ FROM mouse_human_gene_links;
 
 -- SECTION 54: Connect MGI genes to Ensembl genes
 
+-- Store the symbol-based matches separately and keep their provisional status.
+
 CREATE TABLE IF NOT EXISTS mouse_ensembl_links (
     gene_accession_id VARCHAR(20) PRIMARY KEY,
     mouse_ensembl_id VARCHAR(32) NOT NULL,
@@ -1135,6 +1204,8 @@ FROM mouse_ensembl_links;
 
 
 -- SECTION 55: Update the integrated homology view
+
+-- Use the stored mapping table for the final homology view.
 
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW v_gene_homology AS
 
@@ -1355,6 +1426,9 @@ ORDER BY p.parameter_name
 LIMIT 20;
 
 -- Final integrity and performance check
+
+-- Confirm the p-value constraint exists. EXPLAIN shows the query plan for
+-- retrieving an allele's phenotype results; it is not a timing benchmark.
 
 SELECT CONSTRAINT_NAME, CHECK_CLAUSE
 FROM information_schema.CHECK_CONSTRAINTS

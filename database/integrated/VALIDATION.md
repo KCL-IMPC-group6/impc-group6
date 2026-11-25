@@ -1,12 +1,6 @@
-# SQL handover verification — 25 November 2026
+# Database validation — Group 6
 
-## Inputs reviewed
-
-- Supplied current export: `impc_group6_bacup(3).sql`.
-- Supplied working history: `-- IMPC Group 6 database.txt`.
-- Supplied current diagram: `final diagram(1).png`.
-- Prior handover: `Group6_SQL_25Nov_GITHUB_HANDOVER.zip`, including its three metadata CSVs.
-- Project cleaned data and the repository prepared inputs at commit `b77eee40ea744c1d04b0492b86db98cd1def9e32` in `KCL-IMPC-group6/impc-group6`.
+The database was checked against the cleaned analysis data, the supplied parameter, procedure, disease and homology files, and the previous database export. The results below are recorded from the database validation work.
 
 ## Checks completed
 
@@ -25,28 +19,26 @@
 | Primary keys, unique constraints and value CHECKs | Pass on independently loaded records |
 | Current ER diagram | Principal tables and relationships agree with the new export |
 
-The previous review also compared all 48,488 distinct bespoke homology pairs directly with the supplied source file. The new backup's bespoke tables are unchanged.
+The earlier source-data checks also compared all 48,488 distinct bespoke homology pairs directly with the supplied source file. The new backup's bespoke tables are unchanged.
 
-## MySQL execution tests
+## Restore and rebuild tests
 
-Both tests used actual MySQL Community Server 8.4.13 (binary update 8.4.13.1) in separate fresh data directories. Network and Unix-domain sockets are unavailable in the checking environment, so SQL was executed through `mysqld --initialize-insecure --init-file`. This is an offline engine execution test, not a DBeaver UI or normal client-session test.
+- The populated backup was restored to an empty MySQL database. The recorded checks passed for all 24 base-table row counts and three views. Table records were compared with the original export, with no differences.
+- The workflow was run in order with the nine CSV imports at the documented checkpoints, including conversion of `NA` to SQL `NULL` for the cleaned analysis data. The restore checks and collaborator queries ran without SQL errors. The collaborator queries were tested for the available alleles of the five supplied genes.
+- The rebuilt database matched 22 tables directly. The other two (`procedures` and `parameter_metadata`) matched after resolving automatically generated procedure IDs to procedure names. This accounted for all 51 procedures and 5,311 parameter-metadata records. The rebuilt foreign-key relationships were valid.
 
-1. **Backup restore:** the packaged SQL was executed with an empty database selected. All 24 base-table row counts and the three-view count passed SQL assertions. Every table was then exported from MySQL and compared with the original uploaded backup's decoded records: zero differences, including multiplicities.
-2. **Workflow rebuild:** all 129 workflow statements executed in order. The nine prepared CSVs were inserted at the same checkpoints specified for manual DBeaver imports, preserving whitespace/empty strings and mapping literal `NA` to SQL NULL. The shipped restore-check queries and collaborator-query file also executed without SQL errors. The query file was exercised for each of the five supplied genes' non-missing allele symbols.
-3. **Rebuild equivalence:** 22 base tables match the uploaded backup directly. The other two, `procedures` and `parameter_metadata`, differ only in generated procedure IDs. All 51 procedures, their attributes and all 5,311 parameter-metadata records match after resolving those IDs to procedure names. All rebuilt foreign-key references are valid.
+These are the previously recorded MySQL execution results, not a new test of the documentation revision. The exact server version and execution setup are not independently verified here. The DBeaver import interface, local MySQL runtime, connection permissions and Shiny application were not covered by those engine tests.
 
-The manual DBeaver import interface, local MySQL 9.7.2 runtime, connection permissions and Shiny application were not tested. The published import settings and read-only restore checks support checking those local steps. The workflow still needs the documented CSV imports; the test's automatic CSV inserts are a checking mechanism, not part of the user-facing build script.
+## Repeating the checks
 
-## Packaging changes
+Restore the backup or rebuild the database using the README, then run `impc_group6_restore_checks.sql`. The table-count checks should return `PASS` and all orphan counts should be zero. The workflow also contains checks for missing values, the p-value range, LacZ tissue records and parameter-group memberships.
 
-- Replaced the old backup with the supplied 25 November database state.
-- Replaced both diagram formats with the supplied current diagram.
-- Consolidated the working SQL into build order. Removed the orphaned foreign-key fragment and superseded intermediate disease-genotype migrations. The workflow directly creates the final `disease_genotypes` table.
-- Retained the p-value CHECK in the initial table definition and used invoker security consistently for views.
-- Preserved all source records and table constraints while removing server-specific GTID/binary-log commands and original view definers from the portable dump. Split large INSERT statements into smaller batches without changing their values.
-- Included the three missing metadata input CSVs, corrected the import paths and updated all counts/table references.
-- Fixed the ambiguous constraint-name selection in the old restore-check script and added checks for every table count and every foreign-key relationship.
+## Notes on the final database
 
-## Scope
+- The database contains 20 principal tables, four staging tables, three views and 21 foreign keys. It includes 13,912 human gene–disease associations and 7,339 disease–genotype pairs.
+- The portable backup preserves the data and constraints. Server-specific GTID and binary-log commands were removed, views use `SQL SECURITY INVOKER`, and large INSERT statements were split into smaller batches without changing their values.
+- The final workflow creates `disease_genotypes` directly instead of using the superseded intermediate table. Original genotype strings remain in `disease_staging`. The three prepared metadata CSVs retain the source records.
+- The database checks do not establish the biological accuracy of every parameter group or provide an authoritative MGI–Ensembl cross-reference. Some procedure descriptions are retained in staging. See the README for interpretation limitations.
+- The five supplied gene symbols are a discovery list; the four report genotypes and Shiny plots are separate group tasks. The cleaning log should retain evidence for manual repairs, including the strain correction for `an1417460674`.
 
-This verifies the SQL handover. It does not select the four final report genotypes, establish authoritative MGI–Ensembl mappings, validate the scientific membership of every parameter group, or complete the individual report/Shiny deliverables. These limitations are described in the README.
+The executable workflow, backup, input CSVs, collaborator queries and restore checks are unchanged from the preceding handover. The ER diagram uses the original DBeaver image in PNG and PDF format.
