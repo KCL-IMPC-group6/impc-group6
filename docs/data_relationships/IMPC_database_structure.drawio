@@ -1,0 +1,494 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="Electron" version="32.7.4" type="device">
+  <diagram id="Integrated database structure" name="Integrated database structure">
+    <mxGraphModel dx="1680" dy="1716" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="1716" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="page" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1680" height="1716" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_main" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="Main analyses" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="40.0" width="212" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_metadata" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#FFF5E9;strokeColor=#A86425;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="287" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="IMPC metadata" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="315" y="40.0" width="222" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_disease" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#F5F0FA;strokeColor=#795895;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="542" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="Disease" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="570" y="40.0" width="172" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_bespoke" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#EDF7F1;strokeColor=#287B5D;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="747" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" value="Bespoke" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="775" y="40.0" width="177" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_groups" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#ECF7F8;strokeColor=#247D8A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="957" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c11" value="Curated groups" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="985" y="40.0" width="227" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_links" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#F2F5F8;strokeColor=#64748B;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1217" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c13" value="Cross-source links" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1245" y="40.0" width="297" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_metadata" value="" style="rounded=1;arcSize=3;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#DCE5EE;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="106.0" width="455" height="735" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_metadata_stripe" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#A86425;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="106.0" width="5" height="735" as="geometry" />
+        </mxCell>
+        <mxCell id="c16" value="PARAMETER + PROCEDURE METADATA" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#A86425;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="63" y="124.0" width="409" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c17" value="Descriptions linked by original metadata ID" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="63" y="154.0" width="409" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_groups" value="" style="rounded=1;arcSize=3;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#DCE5EE;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="891.0" width="455" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_groups_stripe" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#247D8A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="891.0" width="5" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="c20" value="PARAMETER GROUPS" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#247D8A;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="63" y="909.0" width="409" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c21" value="Curated categories linked to parameters" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="63" y="939.0" width="409" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_main" value="" style="rounded=1;arcSize=3;whiteSpace=nowrap;html=0;fillColor=#F7FAFD;strokeColor=#AFC5D9;strokeWidth=2;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="535" y="301.0" width="610" height="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_main_stripe" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#34699A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="535" y="301.0" width="5" height="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="c24" value="MAIN ANALYSIS DATA" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#34699A;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="558" y="319.0" width="564" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c25" value="One row in analyses = one analysis record" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="558" y="349.0" width="564" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_bespoke" value="" style="rounded=1;arcSize=3;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#DCE5EE;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1185" y="106.0" width="455" height="565" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_bespoke_stripe" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#287B5D;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1185" y="106.0" width="5" height="565" as="geometry" />
+        </mxCell>
+        <mxCell id="c28" value="BESPOKE HOMOLOGY" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#287B5D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1208" y="124.0" width="409" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c29" value="Mouse genes linked to Human / Drill genes" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1208" y="154.0" width="409" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_disease" value="" style="rounded=1;arcSize=3;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#DCE5EE;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1185" y="716.0" width="455" height="850" as="geometry" />
+        </mxCell>
+        <mxCell id="panel_disease_stripe" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#795895;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1185" y="716.0" width="5" height="850" as="geometry" />
+        </mxCell>
+        <mxCell id="c32" value="HUMAN DISEASE ASSOCIATIONS" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#795895;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1208" y="734.0" width="409" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c33" value="Disease-model IDs are annotation identifiers" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1208" y="764.0" width="409" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_group_membership" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#ECF7F8;strokeColor=#247D8A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="parameter_group_membership" object_type="table">
+          <mxGeometry x="65" y="986.0" width="405" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="c35" value="parameter_group_membership" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18.5;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="parameter_group_membership">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_group_membership_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#247D8A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="parameter_group_membership">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c37" value="parameter_stable_id (FK)&#10;group_id (FK)&#10;Unique group / parameter pair" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="parameter_group_membership">
+          <mxGeometry x="15" y="55" width="375" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_groups" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#ECF7F8;strokeColor=#247D8A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="parameter_groups" object_type="table">
+          <mxGeometry x="65" y="1176.0" width="405" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="c39" value="parameter_groups" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="parameter_groups">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_groups_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#247D8A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="parameter_groups">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c41" value="group_id (PK) | group_name" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="parameter_groups">
+          <mxGeometry x="15" y="55" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="procedures" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#FFF5E9;strokeColor=#A86425;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="procedures" object_type="table">
+          <mxGeometry x="65" y="201.0" width="405" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="c43" value="procedures" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="procedures">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="procedures_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#A86425;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="procedures">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c45" value="procedure_id (PK) | procedure_name" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="procedures">
+          <mxGeometry x="15" y="55" width="375" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_metadata" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#FFF5E9;strokeColor=#A86425;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="parameter_metadata" object_type="table">
+          <mxGeometry x="65" y="361.0" width="405" height="143" as="geometry" />
+        </mxCell>
+        <mxCell id="c47" value="parameter_metadata" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="parameter_metadata">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_metadata_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#A86425;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="parameter_metadata">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c49" value="impcParameterOrigId (PK)&#10;parameter_stable_id&#10;procedure_id (FK)" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="parameter_metadata">
+          <mxGeometry x="15" y="55" width="375" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_metadata_links" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#F2F5F8;strokeColor=#64748B;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="parameter_metadata_links" object_type="table">
+          <mxGeometry x="65" y="621.0" width="405" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="c51" value="parameter_metadata_links" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="parameter_metadata_links">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_metadata_links_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#64748B;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="parameter_metadata_links">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c53" value="parameter_stable_id (PK, FK)&#10;impcParameterOrigId (PK, FK)" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="parameter_metadata_links">
+          <mxGeometry x="15" y="55" width="375" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="alleles" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="alleles" object_type="table">
+          <mxGeometry x="565" y="396.0" width="250" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c55" value="alleles" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="alleles">
+          <mxGeometry x="15" y="12" width="220" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="alleles_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#34699A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="alleles">
+          <mxGeometry x="15" y="45" width="220" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c57" value="allele_symbol (PK)&#10;gene_accession_id (FK)" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="alleles">
+          <mxGeometry x="15" y="55" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="genes" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="genes" object_type="table">
+          <mxGeometry x="865" y="396.0" width="250" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c59" value="genes" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="genes">
+          <mxGeometry x="15" y="12" width="220" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="genes_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#34699A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="genes">
+          <mxGeometry x="15" y="45" width="220" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c61" value="gene_accession_id (PK)&#10;gene_symbol" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="genes">
+          <mxGeometry x="15" y="55" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c62" value="START HERE  /  ONE ANALYSIS RECORD" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#34699A;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="577.0" width="410" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="analyses" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#244F73;strokeColor=#173D5C;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="analyses" object_type="table">
+          <mxGeometry x="640" y="616.0" width="400" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="c64" value="analyses" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=28;fontColor=#FFFFFF;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="analyses">
+          <mxGeometry x="15" y="12" width="370" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="analyses_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#8BAAC1;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="analyses">
+          <mxGeometry x="15" y="52" width="370" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c66" value="analysis_id (PK)&#10;gene_accession_id (FK)&#10;allele_symbol (FK pair)&#10;parameter_stable_id (FK)&#10;p_value | strain | life stage" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#F0F6FB;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="analyses">
+          <mxGeometry x="15" y="67" width="370" height="156" as="geometry" />
+        </mxCell>
+        <mxCell id="parameters" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="parameters" object_type="table">
+          <mxGeometry x="565" y="951.0" width="250" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c68" value="parameters" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="parameters">
+          <mxGeometry x="15" y="12" width="220" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="parameters_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#34699A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="parameters">
+          <mxGeometry x="15" y="45" width="220" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c70" value="parameter_stable_id (PK)&#10;parameter_name" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=14.5;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="parameters">
+          <mxGeometry x="15" y="55" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lacz_results" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="lacz_results" object_type="table">
+          <mxGeometry x="865" y="951.0" width="250" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="c72" value="lacz_results" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="lacz_results">
+          <mxGeometry x="15" y="12" width="220" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="lacz_results_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#34699A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="lacz_results">
+          <mxGeometry x="15" y="45" width="220" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c74" value="analysis_id (PK, FK)&#10;tissue_name (PK, FK)&#10;expression_status" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="lacz_results">
+          <mxGeometry x="15" y="55" width="220" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="tissues" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="tissues" object_type="table">
+          <mxGeometry x="865" y="1166.0" width="250" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="c76" value="tissues" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="tissues">
+          <mxGeometry x="15" y="12" width="220" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="tissues_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#34699A;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="tissues">
+          <mxGeometry x="15" y="45" width="220" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c78" value="tissue_name (PK)" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="tissues">
+          <mxGeometry x="15" y="55" width="220" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="c79" value="Allele foreign key = allele_symbol + gene_accession_id." style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="563" y="1266.0" width="555" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="bespoke_gene" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#EDF7F1;strokeColor=#287B5D;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="bespoke_gene" object_type="table">
+          <mxGeometry x="1210" y="201.0" width="405" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="c81" value="bespoke_gene" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="bespoke_gene">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="bespoke_gene_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#287B5D;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="bespoke_gene">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c83" value="gene_id (PK)&#10;gene_name | species_id (FK)" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="bespoke_gene">
+          <mxGeometry x="15" y="55" width="375" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="bespoke_species" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#EDF7F1;strokeColor=#287B5D;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="bespoke_species" object_type="table">
+          <mxGeometry x="1210" y="356.0" width="175" height="99" as="geometry" />
+        </mxCell>
+        <mxCell id="c85" value="bespoke_species" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="bespoke_species">
+          <mxGeometry x="15" y="12" width="145" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="bespoke_species_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#287B5D;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="bespoke_species">
+          <mxGeometry x="15" y="45" width="145" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c87" value="species_id (PK)&#10;Mouse / Human / Drill" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=12.5;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="bespoke_species">
+          <mxGeometry x="15" y="55" width="145" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="bespoke_homology" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#EDF7F1;strokeColor=#287B5D;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="bespoke_homology" object_type="table">
+          <mxGeometry x="1410" y="356.0" width="205" height="124" as="geometry" />
+        </mxCell>
+        <mxCell id="c89" value="bespoke_homology" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16.5;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="bespoke_homology">
+          <mxGeometry x="15" y="12" width="175" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="bespoke_homology_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#287B5D;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="bespoke_homology">
+          <mxGeometry x="15" y="45" width="175" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c91" value="mouse_gene_id&#10;target_gene_id&#10;Type | ancestor | % ID" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=13.5;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="bespoke_homology">
+          <mxGeometry x="15" y="55" width="175" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="mouse_ensembl_links" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#F2F5F8;strokeColor=#64748B;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="mouse_ensembl_links" object_type="table">
+          <mxGeometry x="1210" y="526.0" width="405" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="c93" value="mouse_ensembl_links" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="mouse_ensembl_links">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="mouse_ensembl_links_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#64748B;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="mouse_ensembl_links">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c95" value="gene_accession_id (PK, FK)&#10;mouse_ensembl_id (FK)&#10;Provisional symbol match" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="mouse_ensembl_links">
+          <mxGeometry x="15" y="55" width="375" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="mouse_human_gene_links" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#F2F5F8;strokeColor=#64748B;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="mouse_human_gene_links" object_type="table">
+          <mxGeometry x="1210" y="811.0" width="405" height="111" as="geometry" />
+        </mxCell>
+        <mxCell id="c97" value="mouse_human_gene_links" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="mouse_human_gene_links">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="mouse_human_gene_links_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#64748B;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="mouse_human_gene_links">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c99" value="gene_accession_id (PK, FK)&#10;hgnc_id (PK, FK)" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="mouse_human_gene_links">
+          <mxGeometry x="15" y="55" width="375" height="51" as="geometry" />
+        </mxCell>
+        <mxCell id="human_genes" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#F5F0FA;strokeColor=#795895;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="human_genes" object_type="table">
+          <mxGeometry x="1210" y="966.0" width="405" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c101" value="human_genes" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="human_genes">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="human_genes_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#795895;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="human_genes">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c103" value="hgnc_id (PK)&#10;human_gene_symbol" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="human_genes">
+          <mxGeometry x="15" y="55" width="375" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="human_gene_diseases" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#F5F0FA;strokeColor=#795895;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="human_gene_diseases" object_type="table">
+          <mxGeometry x="1210" y="1121.0" width="405" height="111" as="geometry" />
+        </mxCell>
+        <mxCell id="c105" value="human_gene_diseases" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="human_gene_diseases">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="human_gene_diseases_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#795895;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="human_gene_diseases">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c107" value="hgnc_id (PK, FK)&#10;disease_id (PK, FK)" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="human_gene_diseases">
+          <mxGeometry x="15" y="55" width="375" height="51" as="geometry" />
+        </mxCell>
+        <mxCell id="diseases" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#F5F0FA;strokeColor=#795895;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="diseases" object_type="table">
+          <mxGeometry x="1210" y="1276.0" width="405" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c109" value="diseases" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="diseases">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="diseases_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#795895;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="diseases">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c111" value="disease_id (PK)&#10;disease_name" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="diseases">
+          <mxGeometry x="15" y="55" width="375" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="disease_genotypes" value="" style="rounded=1;arcSize=5;whiteSpace=nowrap;html=0;fillColor=#F5F0FA;strokeColor=#795895;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="disease_genotypes" object_type="table">
+          <mxGeometry x="1210" y="1431.0" width="405" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c113" value="disease_genotypes" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="disease_genotypes">
+          <mxGeometry x="15" y="12" width="375" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="disease_genotypes_rule" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#795895;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="disease_genotypes">
+          <mxGeometry x="15" y="45" width="375" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c115" value="disease_id (PK, FK)&#10;mouse_genotype_id (PK)" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#354F66;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="disease_genotypes">
+          <mxGeometry x="15" y="55" width="375" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c116" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="alleles" target="genes" relationship_type="foreign_key" foreign_key_columns="gene_accession_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c117" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#34699A;strokeWidth=2.5;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.24;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="analyses" target="genes" relationship_type="foreign_key" foreign_key_columns="gene_accession_id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="671.0" />
+              <mxPoint x="1080" y="556.0" />
+              <mxPoint x="990" y="556.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c118" value="allele + gene" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#34699A;strokeWidth=2.5;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.24;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="analyses" target="alleles" relationship_type="foreign_key" foreign_key_columns="allele_symbol,gene_accession_id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="671.0" />
+              <mxPoint x="600" y="556.0" />
+              <mxPoint x="690" y="556.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c119" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#34699A;strokeWidth=2.5;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="analyses" target="parameters" relationship_type="foreign_key" foreign_key_columns="parameter_stable_id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="906.0" />
+              <mxPoint x="690" y="906.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c120" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#34699A;strokeWidth=2.5;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.8;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="lacz_results" target="analyses" relationship_type="foreign_key" foreign_key_columns="analysis_id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="990" y="906.0" />
+              <mxPoint x="960" y="906.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c121" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="lacz_results" target="tissues" relationship_type="foreign_key" foreign_key_columns="tissue_name">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c122" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="parameter_group_membership" target="parameter_groups" relationship_type="foreign_key" foreign_key_columns="group_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c123" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.55;entryDx=0;entryDy=0;" edge="1" parent="1" source="parameter_group_membership" target="parameters" relationship_type="foreign_key" foreign_key_columns="parameter_stable_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c124" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="parameter_metadata" target="procedures" relationship_type="foreign_key" foreign_key_columns="procedure_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c125" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="parameter_metadata_links" target="parameter_metadata" relationship_type="foreign_key" foreign_key_columns="impcParameterOrigId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c126" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" edge="1" parent="1" source="parameter_metadata_links" target="parameters" relationship_type="foreign_key" foreign_key_columns="parameter_stable_id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="515" y="713.0" />
+              <mxPoint x="515" y="973.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c127" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="bespoke_gene" target="bespoke_species" relationship_type="foreign_key" foreign_key_columns="species_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c128" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.65;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="bespoke_homology" target="bespoke_gene" relationship_type="foreign_key" foreign_key_columns="mouse_gene_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c129" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.85;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="bespoke_homology" target="bespoke_gene" relationship_type="foreign_key" foreign_key_columns="target_gene_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c130" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;" edge="1" parent="1" source="mouse_ensembl_links" target="bespoke_gene" relationship_type="foreign_key" foreign_key_columns="mouse_ensembl_id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1195" y="551.0" />
+              <mxPoint x="1195" y="266.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c131" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.6;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="mouse_ensembl_links" target="genes" relationship_type="foreign_key" foreign_key_columns="gene_accession_id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1168" y="601.0" />
+              <mxPoint x="1168" y="429.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c132" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.8;entryDx=0;entryDy=0;" edge="1" parent="1" source="mouse_human_gene_links" target="genes" relationship_type="foreign_key" foreign_key_columns="gene_accession_id">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1156" y="839.0" />
+              <mxPoint x="1156" y="484.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c133" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mouse_human_gene_links" target="human_genes" relationship_type="foreign_key" foreign_key_columns="hgnc_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c134" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="human_gene_diseases" target="human_genes" relationship_type="foreign_key" foreign_key_columns="hgnc_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c135" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="human_gene_diseases" target="diseases" relationship_type="foreign_key" foreign_key_columns="disease_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c136" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#72879B;strokeWidth=1.8;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="disease_genotypes" target="diseases" relationship_type="foreign_key" foreign_key_columns="disease_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="views_panel" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=1.3;shadow=0;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1346.0" width="1105" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="c138" value="QUERY LAYER  /  3 VIEWS" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#5D7085;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="62" y="1365.0" width="1050" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c139" value="v_analyses_parameters" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="62" y="1410.0" width="365" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c140" value="Analyses with readable parameter names" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="455" y="1410.0" width="650" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c141" value="v_mouse_gene_matches" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="62" y="1456.0" width="365" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c142" value="Unique symbol-based MGI / Ensembl candidates" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="455" y="1456.0" width="650" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c143" value="v_gene_homology" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="62" y="1502.0" width="365" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c144" value="Integrated mouse-to-Human / Drill homology" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="455" y="1502.0" width="650" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c145" value="Arrow direction: foreign-key table → referenced table. PK = primary key; FK = foreign key. Selected fields are shown." style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="1596.0" width="1590" height="31" as="geometry" />
+        </mxCell>
+        <mxCell id="c146" value="4 retained staging tables appear in the data-source diagram. Views are queries and do not add foreign-key constraints." style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="1636.0" width="1590" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c147" value="Source: database/integrated/impc_group6_workflow.sql. Full field definitions are available in the original ER diagram." style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="1674.0" width="1590" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

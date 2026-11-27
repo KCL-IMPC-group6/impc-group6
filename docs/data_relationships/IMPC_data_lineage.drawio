@@ -1,0 +1,329 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="Electron" version="32.7.4" type="device">
+  <diagram id="Data sources and transformations" name="Data sources and transformations">
+    <mxGraphModel dx="1680" dy="1386" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="1386" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="page" value="" style="rounded=0;arcSize=0;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=none;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1680" height="1386" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_main" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="Main analyses" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="40.0" width="212" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_metadata" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#FFF5E9;strokeColor=#A86425;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="287" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="IMPC metadata" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="315" y="40.0" width="222" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_disease" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#F5F0FA;strokeColor=#795895;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="542" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="Disease" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="570" y="40.0" width="172" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_bespoke" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#EDF7F1;strokeColor=#287B5D;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="747" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" value="Bespoke" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="775" y="40.0" width="177" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_groups" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#ECF7F8;strokeColor=#247D8A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="957" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c11" value="Curated groups" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="985" y="40.0" width="227" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_links" value="" style="rounded=1;arcSize=2;whiteSpace=nowrap;html=0;fillColor=#F2F5F8;strokeColor=#64748B;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1217" y="44.0" width="17" height="17" as="geometry" />
+        </mxCell>
+        <mxCell id="c13" value="Cross-source links" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=18;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1245" y="40.0" width="297" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c14" value="DATA INPUTS" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="100.0" width="360" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c15" value="IMPORT / TRANSFORMATION" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="460" y="100.0" width="430" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c16" value="PRINCIPAL TABLES CREATED" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="100.0" width="660" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="input_main" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="146.0" width="355" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c18" value="Cleaned IMPC analyses" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="162.0" width="322" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c19" value="final_clean_data.csv&#10;27,983 analysis records" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="220.0" width="322" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="transform_main" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#34699A;strokeWidth=1.3;shadow=0;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry x="460" y="146.0" width="425" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c21" value="STAGING TABLE  /  retained import" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=13.5;fontColor=#34699A;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="161.0" width="395" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c22" value="clean_data_staging" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="205.0" width="395" height="69" as="geometry" />
+        </mxCell>
+        <mxCell id="output_main" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#EFF5FB;strokeColor=#34699A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="146.0" width="685" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c24" value="genes" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="162.0" width="315" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c25" value="alleles" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1304" y="162.0" width="315" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c26" value="analyses" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="191.0" width="315" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c27" value="parameters" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1304" y="191.0" width="315" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c28" value="tissues" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="220.0" width="315" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c29" value="lacz_results" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1304" y="220.0" width="315" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c30" value="Split identities, analyses and 11 tissue results" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="257.0" width="640" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#34699A;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="input_main" target="transform_main">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#34699A;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="transform_main" target="output_main">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="input_metadata" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFF5E9;strokeColor=#A86425;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="310.0" width="355" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c34" value="IMPC parameter + procedure&#10;metadata" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="326.0" width="322" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c35" value="parameter_description_import.csv&#10;procedure_import.csv" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="384.0" width="322" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="transform_metadata" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#A86425;strokeWidth=1.3;shadow=0;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry x="460" y="310.0" width="425" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c37" value="2 STAGING TABLES  /  retained imports" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=13.5;fontColor=#A86425;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="325.0" width="395" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c38" value="parameter_description_staging&#10;procedure_staging" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="369.0" width="395" height="69" as="geometry" />
+        </mxCell>
+        <mxCell id="output_metadata" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFF5E9;strokeColor=#A86425;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="310.0" width="685" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c40" value="parameter_metadata" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="333.0" width="635" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="c41" value="procedures" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="368.0" width="635" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="c42" value="Keep original metadata IDs and procedure names" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="421.0" width="640" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#A86425;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="input_metadata" target="transform_metadata">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#A86425;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="transform_metadata" target="output_metadata">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="input_disease" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#F5F0FA;strokeColor=#795895;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="474.0" width="355" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c46" value="Human disease annotations" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="490.0" width="322" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c47" value="disease_import_ready.csv&#10;Gene, disease and model associations" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="548.0" width="322" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="transform_disease" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#795895;strokeWidth=1.3;shadow=0;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry x="460" y="474.0" width="425" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c49" value="STAGING TABLE  /  retained import" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=13.5;fontColor=#795895;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="489.0" width="395" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c50" value="disease_staging" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="533.0" width="395" height="69" as="geometry" />
+        </mxCell>
+        <mxCell id="output_disease" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#F5F0FA;strokeColor=#795895;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="474.0" width="685" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c52" value="human_genes" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19.5;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="498.0" width="315" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c53" value="diseases" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19.5;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1304" y="498.0" width="315" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c54" value="human_gene_diseases" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19.5;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="532.0" width="315" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c55" value="disease_genotypes" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19.5;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1304" y="532.0" width="315" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c56" value="Separate genes, diseases and association pairs" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="585.0" width="640" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c57" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#795895;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="input_disease" target="transform_disease">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c58" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#795895;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="transform_disease" target="output_disease">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="input_bespoke" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#EDF7F1;strokeColor=#287B5D;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="638.0" width="355" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c60" value="Mouse / Human / Drill homology" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="654.0" width="322" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c61" value="bespokeTask_hml.txt&#10;Original homology file" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="712.0" width="322" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="transform_bespoke" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#287B5D;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="460" y="638.0" width="425" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c63" value="PYTHON PROCESSING  /  CSV exports" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=13.5;fontColor=#287B5D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="653.0" width="395" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c64" value="Clean, split and export" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="697.0" width="395" height="69" as="geometry" />
+        </mxCell>
+        <mxCell id="output_bespoke" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#EDF7F1;strokeColor=#287B5D;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="638.0" width="685" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c66" value="bespoke_species" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20.5;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="650.0" width="635" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c67" value="bespoke_gene" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20.5;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="679.0" width="635" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c68" value="bespoke_homology" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20.5;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="708.0" width="635" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="c69" value="Three CSV exports are imported into these tables" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="749.0" width="640" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c70" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#287B5D;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="input_bespoke" target="transform_bespoke">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c71" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#287B5D;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="transform_bespoke" target="output_bespoke">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="input_groups" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#ECF7F8;strokeColor=#247D8A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="802.0" width="355" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c73" value="Team-curated parameter groups" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="818.0" width="322" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c74" value="parameter_group.csv&#10;parameter_group_member.csv" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="876.0" width="322" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="transform_groups" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#247D8A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="460" y="802.0" width="425" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c76" value="SQL IMPORT  /  groups are defined in R" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=13.5;fontColor=#247D8A;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="817.0" width="395" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c77" value="Import curated CSVs" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="476" y="861.0" width="395" height="69" as="geometry" />
+        </mxCell>
+        <mxCell id="output_groups" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#ECF7F8;strokeColor=#247D8A;strokeWidth=1.3;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="802.0" width="685" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="c79" value="parameter_groups" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="825.0" width="635" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="c80" value="parameter_group_membership" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=21;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="860.0" width="635" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="c81" value="Shared parameters are already in the main data" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="974" y="913.0" width="640" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c82" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#247D8A;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="input_groups" target="transform_groups">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c83" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#247D8A;strokeWidth=2;fontFamily=Arial;fontSize=14;fontColor=#5D7085;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="transform_groups" target="output_groups">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c84" value="CROSS-SOURCE LINKS  /  generated during integration" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=19;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="986.0" width="1550" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="parameter_metadata_links" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#F2F5F8;strokeColor=#64748B;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="parameter_metadata_links">
+          <mxGeometry x="40" y="1028.0" width="520" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="c86" value="parameter_metadata_links" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="1045.0" width="486" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c87" value="Main parameters + IMPC metadata" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="1081.0" width="486" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c88" value="parameter_stable_id + impcParameterOrigId" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="1112.0" width="486" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="mouse_human_gene_links" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#F2F5F8;strokeColor=#64748B;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="mouse_human_gene_links">
+          <mxGeometry x="580" y="1028.0" width="520" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="c90" value="mouse_human_gene_links" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="597" y="1045.0" width="486" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c91" value="Main genes + disease annotations" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="597" y="1081.0" width="486" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c92" value="MGI accession ID + HGNC ID" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="597" y="1112.0" width="486" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="mouse_ensembl_links" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#F2F5F8;strokeColor=#64748B;strokeWidth=1.3;shadow=0;" vertex="1" parent="1" table_name="mouse_ensembl_links">
+          <mxGeometry x="1120" y="1028.0" width="520" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="c94" value="mouse_ensembl_links" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#18334D;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1137" y="1045.0" width="486" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="c95" value="Main genes + Bespoke mouse genes" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1137" y="1081.0" width="486" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c96" value="MGI + Ensembl ID; provisional symbol match" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1137" y="1112.0" width="486" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="views" value="" style="rounded=1;arcSize=4;whiteSpace=nowrap;html=0;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=1.3;shadow=0;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1176.0" width="1600" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="c98" value="3 VIEWS  /  saved queries over existing tables" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=17;fontColor=#5D7085;fontFamily=Arial;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="58" y="1192.0" width="1564" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c99" value="v_analyses_parameters" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="58" y="1226.0" width="510" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c100" value="Analysis results with parameter names" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="58" y="1260.0" width="510" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c101" value="v_mouse_gene_matches" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="588" y="1226.0" width="510" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c102" value="Unique mouse symbol-matching candidates" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="588" y="1260.0" width="510" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c103" value="v_gene_homology" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=20;fontColor=#18334D;fontFamily=Consolas;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1118" y="1226.0" width="510" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c104" value="Integrated Human / Drill homology results" style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15.5;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1118" y="1260.0" width="510" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c105" value="Arrows show data preparation, not foreign keys. Dashed import boxes are staging tables; dashed view box is a query layer." style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=16;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="1316.0" width="1590" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="c106" value="tissues and bespoke_species contain reference lists defined in SQL. Source: database/integrated/impc_group6_workflow.sql." style="text;html=0;whiteSpace=nowrap;overflow=hidden;fillColor=none;strokeColor=none;align=left;verticalAlign=top;fontSize=15;fontColor=#5D7085;fontFamily=Arial;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="42" y="1347.0" width="1590" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

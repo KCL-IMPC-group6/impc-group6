@@ -1,1 +1,0 @@
-Project notes and diagrams will go here.

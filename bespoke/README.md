@@ -87,9 +87,17 @@ the header. Enable "Set empty strings to NULL" to preserve missing names.
 Select `bespoke_dev` and run `bespoke/example_queries.sql`.
 The example returns the human and drill orthologs of the mouse gene `Ccnb1`.
 
+
 ## Connection to the main database
 
-Integration with the main database is still pending.
-Mouse gene symbols can be used for matching after checking for missing
-or ambiguous mappings. Ensembl IDs remain the primary gene identifiers
-within this module.
+This module is now included in the integrated database.
+
+The `mouse_ensembl_links` table connects MGI gene IDs in the main
+database to mouse Ensembl IDs in `bespoke_gene`.
+
+These links are provisional and are based on unique, exact,
+case-sensitive mouse gene symbol matches. Ensembl IDs remain
+the primary gene identifiers within this module.
+
+See the [integrated database instructions](../database/integrated/README.md)
+to restore and use the complete database.
