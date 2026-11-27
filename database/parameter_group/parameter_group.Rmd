@@ -96,10 +96,7 @@ setequal(group_table$group_name, names(group_list))
 ```
 ## Parameter-group member table
 ```{r}
-# member_id gives each group-parameter relationship a unique identifier,
-# making it easier to define a single-column primary key in SQL.
 parameter_group_member <- data.frame(
-  member_id = integer(),
   group_id = integer(),
   parameter_stable_id = character(),
   stringsAsFactors = FALSE
@@ -115,7 +112,6 @@ for (g in names(group_list)) {
     ]
 
     new_rows <- data.frame(
-  member_id = nrow(parameter_group_member) + seq_len(nrow(selected)),
   group_id = rep(group_id, nrow(selected)),
   parameter_stable_id = selected$parameter_stable_id,
   stringsAsFactors = FALSE

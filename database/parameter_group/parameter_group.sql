@@ -17,12 +17,11 @@ CREATE TABLE parameter_group (
 );
 
 CREATE TABLE parameter_group_member (
-    member_id INT NOT NULL,
     group_id INT NOT NULL,
     parameter_stable_id VARCHAR(20) NOT NULL,
-    PRIMARY KEY (member_id),
-    UNIQUE (group_id, parameter_stable_id),
-    FOREIGN KEY (group_id) REFERENCES parameter_group (group_id),
+    PRIMARY KEY (group_id, parameter_stable_id),
+    FOREIGN KEY (group_id) 
+        REFERENCES parameter_group (group_id),
     FOREIGN KEY (parameter_stable_id)
         REFERENCES parameter_table (parameter_stable_id)
 );
